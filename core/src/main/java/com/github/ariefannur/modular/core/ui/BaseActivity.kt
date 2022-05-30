@@ -11,4 +11,5 @@ abstract class BaseActivity : AppCompatActivity(){
     }
 
     abstract fun layoutId():Int
+
 }
