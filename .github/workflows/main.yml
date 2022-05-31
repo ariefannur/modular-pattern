@@ -13,6 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Decode TOKEN
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: echo token="$TOKEN" > ./local.properties
+
       - name: Unit tests
         run: ./gradlew test
   ## 4
