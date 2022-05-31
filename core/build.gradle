@@ -23,11 +23,17 @@ android {
     }
 
     buildTypes {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        def token = properties.getOrDefault('secret.token', "")
+
         debug {
             buildConfigField "String", "BASE_URL", "\"https://api.github.com/\""
+            buildConfigField "String", "TOKEN", "\"$token\""
         }
         release {
             buildConfigField "String", "BASE_URL", "\"https://api.github.com/\""
+            buildConfigField "String", "TOKEN", "\"$token\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
