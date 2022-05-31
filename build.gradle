@@ -27,7 +27,7 @@ buildscript {
             'gson'               : '2.8.5',
             'mockk'              : '1.12.4',
             'jsoup'              : '1.11.3',
-            'junit'              : '4.12',
+            'junit'              : '4.13',
             'kotlin'             : '1.6.20',
             'ktlint'             : '0.36.0',
             'lifecycle'          : '2.2.0-alpha03',
@@ -38,6 +38,14 @@ buildscript {
             'room'               : '2.2.1',
             'hilt'               : '2.42',
             'coroutine'          : '1.5.2',
+    ]
+
+
+    ext.TestDependency = [
+            'JUNIT'          : "junit:junit:$versions.junit",
+            'MOCKK'          : "io.mockk:mockk:$versions.mockk",
+            'COROUTINE_TEST' : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutine",
+            'MOCK_WEBSERVER' : "com.squareup.okhttp3:mockwebserver:$versions.okhttp"
     ]
 
     dependencies {

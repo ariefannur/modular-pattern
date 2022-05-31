@@ -16,10 +16,12 @@ abstract class BaseUseCase<out Type, in Params> where Type : Any {
         scope.launch(Dispatchers.IO) {
             try {
                 callback.invoke(DataState.Loading)
-                run(params).collect {
+                val deferred = async {  run(params) }
+                deferred.await().collect {
                     callback.invoke(DataState.Success(it))
                 }
             } catch (e: Exception) {
+                println("Error ${e.message}")
                 callback.invoke(DataState.Failure(404, e.message ?: ""))
             }
 

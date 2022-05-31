@@ -1,6 +1,5 @@
 package com.github.ariefannur.modular.features.search.data.repository
 
-import android.util.Log
 import com.github.ariefannur.modular.features.search.domain.LocalSearchUsers
 import com.github.ariefannur.modular.features.search.domain.RemoteSearchUsers
 import com.github.ariefannur.modular.features.search.domain.SearchRepository
@@ -13,7 +12,6 @@ class SearchRepositoryImpl(
     private val local: LocalSearchUsers): SearchRepository {
     override suspend fun searchUsers(queryName: String): Flow<List<User>> = flow {
         with(local.getCacheUsers(queryName)) {
-            Log.d("AF", "LOCAL $this")
             if (this.isNotEmpty()) {
                 emit(this)
             } else {

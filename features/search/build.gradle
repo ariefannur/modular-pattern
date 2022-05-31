@@ -42,6 +42,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$versions.room"
     kapt "androidx.room:room-compiler:$versions.room"
 
+    testImplementation TestDependency.JUNIT
+    testImplementation TestDependency.COROUTINE_TEST
+    testImplementation TestDependency.MOCKK
 }
 
 kapt {
