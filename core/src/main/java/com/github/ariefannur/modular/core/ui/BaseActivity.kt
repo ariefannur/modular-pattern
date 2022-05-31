@@ -2,14 +2,25 @@ package com.github.ariefannur.modular.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity : AppCompatActivity(){
+abstract class BaseActivity<T: ViewBinding> : AppCompatActivity(){
+
+    val viewBinding: T by lazy { bindLayout() }
+    abstract fun bindLayout(): T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layoutId())
+        with(viewBinding) {
+            setContentView(this.root)
+            onBind(this)
+        }
     }
 
-    abstract fun layoutId():Int
+    open fun onBind(binding: T) {
+
+    }
+
+
 
 }

@@ -1,30 +1,76 @@
 package com.github.ariefannur.modular.features.search.presentation
 
-import android.os.Bundle
-import android.util.Log
-import com.github.ariefannur.modular.core.base.DataState
+import androidx.activity.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.ariefannur.modular.core.extension.textChanges
 import com.github.ariefannur.modular.core.ui.BaseActivity
-import com.github.ariefannur.modular.features.search.R
-import com.github.ariefannur.modular.features.search.domain.SearchUser
+import com.github.ariefannur.modular.features.search.databinding.LayoutSearchBinding
+import com.github.ariefannur.modular.features.search.domain.User
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchActivity: BaseActivity() {
-    override fun layoutId(): Int = R.layout.layout_search
+class SearchActivity: BaseActivity<LayoutSearchBinding>() {
 
-    @Inject
-    lateinit var searchUser: SearchUser
+    override fun bindLayout(): LayoutSearchBinding = LayoutSearchBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val searchViewModel: SearchViewModel by viewModels()
 
-        searchUser("wang") {
-            when(it) {
-                is DataState.Loading -> Log.d("AF", "loadinggg")
-                is DataState.Success -> Log.d("AF", "SUCCEESS ->    ${it.result}")
-            }
+    override fun onBind(binding: LayoutSearchBinding) {
+        super.onBind(binding)
+        binding.etSearch.textChanges().debounce(1000).onEach {
+           if(!it.isNullOrEmpty()) {
+               searchViewModel.doSearchUsers(it.toString())
+           } else {
+               binding.rvSearch.adapter = SearchAdapter(listOf())
+           }
+        }.launchIn(lifecycleScope)
+
+        setUpList()
+
+        lifecycleScope.launch {
+           repeatOnLifecycle(Lifecycle.State.STARTED) {
+               searchViewModel.listUser.collect {
+                   render(it)
+               }
+           }
+       }
+    }
+
+    private fun setUpList() {
+        with(viewBinding.rvSearch) {
+            layoutManager = LinearLayoutManager(this@SearchActivity)
+            addItemDecoration(
+                DividerItemDecoration(this@SearchActivity, DividerItemDecoration.VERTICAL)
+            )
         }
+    }
+
+    private fun render(it: SearchState) {
+        when(it) {
+            is SearchState.Loading -> showLoading(true)
+            is SearchState.Success -> arrangeList(it.list)
+            is SearchState.Failed -> showError(it.message)
+        }
+    }
+
+    private fun arrangeList(list: List<User>) {
+        showLoading(false)
+        viewBinding.rvSearch.adapter = SearchAdapter(list)
 
     }
+
+    private fun showLoading(isLoading: Boolean) {
+
+    }
+
+    private fun showError(message: String) {
+        showLoading(false)
+    }
+
 }

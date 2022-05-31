@@ -7,7 +7,6 @@ import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -16,6 +15,7 @@ class MainActivity : AppCompatActivity() {
                 Class.forName("com.github.ariefannur.modular.features.search.presentation.SearchActivity")
             )
             startActivity(intent)
+            finish()
         } catch (e: Exception) {
             Log.d("AF", "error intent ${e.message}")
         }
