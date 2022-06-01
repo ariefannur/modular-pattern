@@ -52,5 +52,8 @@
         android:layout_marginBottom="10dp"
         />
 
+    <include
+        android:id="@+id/empty"
+        layout="@layout/empty_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,7 +37,7 @@ fun View.visible() {
 }
 
 fun ImageView.displayAvatar(url: String) {
-    val roundedCorners = RoundedCorners(20.dp)
+    val roundedCorners = RoundedCorners(40.dp)
     val options = RequestOptions.bitmapTransform(roundedCorners)
     Glide.with(context)
         .load(url)

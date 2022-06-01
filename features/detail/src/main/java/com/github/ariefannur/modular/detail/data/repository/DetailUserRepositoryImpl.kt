@@ -10,8 +10,9 @@ class DetailUserRepositoryImpl(
 ): DetailUserRepository {
     override suspend fun getDetailUser(username: String): Flow<DetailUser> = flow {
         with(local.getDetailUser(username)) {
-            if (this.name != "") emit(this)
+            this?.let {  emit(this) }
         }
+
         with(remote.requestDetailUser(username)) {
             if (this.name != ""){
                 emit(this)

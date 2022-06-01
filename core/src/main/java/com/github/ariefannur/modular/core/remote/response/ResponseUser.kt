@@ -1,6 +1,5 @@
-package com.github.ariefannur.modular.features.search.data.datasource.response
+package com.github.ariefannur.modular.core.remote.response
 
-import com.github.ariefannur.modular.features.search.domain.User
 import com.squareup.moshi.Json
 
 data class ResponseUser (
@@ -13,16 +12,4 @@ data class ResponseUser (
     @field:Json(name = "following") val following: Int?,
     @field:Json(name = "email") val email: String?,
     @field:Json(name = "location") val location: String?,
-) {
-
-    fun toUser(): User {
-        return User(
-            name = name.orEmpty(),
-            username = login.orEmpty(),
-            description = bio.orEmpty(),
-            address = location.orEmpty(),
-            avatar = avatar_url.orEmpty(),
-            email = email.orEmpty()
-        )
-    }
-}
+)

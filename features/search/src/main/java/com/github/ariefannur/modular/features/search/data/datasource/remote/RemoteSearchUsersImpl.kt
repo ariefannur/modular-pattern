@@ -1,5 +1,6 @@
 package com.github.ariefannur.modular.features.search.data.datasource.remote
 
+import com.github.ariefannur.modular.features.search.data.datasource.response.toUser
 import com.github.ariefannur.modular.features.search.domain.RemoteSearchUsers
 import com.github.ariefannur.modular.features.search.domain.User
 import kotlinx.coroutines.Dispatchers

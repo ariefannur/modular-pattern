@@ -20,4 +20,5 @@ data class DetailUser (
             email = email, follower = follower,
             following = following, description = description)
     }
+
 }

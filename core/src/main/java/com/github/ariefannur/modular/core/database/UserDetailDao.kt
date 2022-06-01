@@ -9,7 +9,7 @@ import androidx.room.Query
 interface UserDetailDao {
 
    @Query("SELECT * FROM UserDetailEntity WHERE username = :username")
-    fun getUserDetail(username: String) : UserDetailEntity
+    fun getUserDetail(username: String) : List<UserDetailEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveUserDetail(userDetailEntity: UserDetailEntity)

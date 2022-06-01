@@ -1,5 +1,6 @@
 package com.github.ariefannur.modular.features.search.presentation
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,17 @@ class SearchViewHolder(private val binding: ItemSearchBinding) : RecyclerView.Vi
            } else {
                tvDesc.visible()
                tvDesc.text = user.description
+           }
+
+           binding.root.setOnClickListener {
+               val context = binding.root.context
+               val intent = Intent(
+                   context,
+                   Class.forName("com.github.ariefannur.modular.detail.presentation.DetailUserActivity")
+               ).apply {
+                   putExtra("username", user.username)
+               }
+               context.startActivity(intent)
            }
        }
     }

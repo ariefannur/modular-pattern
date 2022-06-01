@@ -6,7 +6,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.ariefannur.modular.core.extension.gone
 import com.github.ariefannur.modular.core.extension.textChanges
+import com.github.ariefannur.modular.core.extension.visible
 import com.github.ariefannur.modular.core.ui.BaseActivity
 import com.github.ariefannur.modular.features.search.databinding.LayoutSearchBinding
 import com.github.ariefannur.modular.features.search.domain.User
@@ -28,6 +30,7 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
                searchViewModel.doSearchUsers(it.toString())
            } else {
                binding.rvSearch.adapter = SearchAdapter(listOf())
+               enableEmpty(true)
            }
         }.launchIn(lifecycleScope)
 
@@ -42,7 +45,16 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
        }
     }
 
+    private fun enableEmpty(enable: Boolean) {
+        val emptyBinding = viewBinding.empty
+        if (enable)
+            emptyBinding.rlEmpty.visible()
+        else
+            emptyBinding.rlEmpty.gone()
+    }
+
     private fun setUpList() {
+        enableEmpty(true)
         with(viewBinding.rvSearch) {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             addItemDecoration(
@@ -52,6 +64,7 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
     }
 
     private fun render(it: SearchState) {
+        enableEmpty(false)
         when(it) {
             is SearchState.Loading -> {
                 showLoading(true)

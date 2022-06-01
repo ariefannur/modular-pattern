@@ -12,8 +12,10 @@ class LocalDetailUserImpl(
     private val userDetailDao: UserDetailDao,
     private val userRepoDao: UserRepoDao
     ): LocalDetailUser {
-    override suspend fun getDetailUser(username: String): DetailUser {
-        return userDetailDao.getUserDetail(username).toUserDetail()
+    override suspend fun getDetailUser(username: String): DetailUser? {
+        return with(userDetailDao.getUserDetail(username)) {
+            if (this.isNullOrEmpty()) null else this[0].toUserDetail()
+        }
     }
 
     override suspend fun cacheDetailUser(detail: DetailUser) {
