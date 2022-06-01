@@ -1,4 +1,4 @@
-package com.github.ariefannur.modular.features.search.data.datasource.local
+package com.github.ariefannur.modular.core.database
 
 import androidx.room.Dao
 import androidx.room.Insert
