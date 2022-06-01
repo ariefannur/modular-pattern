@@ -1,6 +1,6 @@
 package com.github.ariefannur.modular.features.search.domain
 
-import com.github.ariefannur.modular.features.search.data.datasource.local.UserEntity
+import com.github.ariefannur.modular.core.database.UserEntity
 
 data class User (
         val name: String,

@@ -38,4 +38,6 @@ class SearchViewHolder(private val binding: ItemSearchBinding) : RecyclerView.Vi
            }
        }
     }
+
+
 }

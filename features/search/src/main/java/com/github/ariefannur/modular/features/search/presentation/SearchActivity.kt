@@ -20,7 +20,7 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
     override fun bindLayout(): LayoutSearchBinding = LayoutSearchBinding.inflate(layoutInflater)
 
     private val searchViewModel: SearchViewModel by viewModels()
-
+    private val loadingDialog by lazy {  LoadingDialog(this) }
     override fun onBind(binding: LayoutSearchBinding) {
         super.onBind(binding)
         binding.etSearch.textChanges().debounce(1000).onEach {
@@ -53,7 +53,9 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
 
     private fun render(it: SearchState) {
         when(it) {
-            is SearchState.Loading -> showLoading(true)
+            is SearchState.Loading -> {
+                showLoading(true)
+            }
             is SearchState.Success -> arrangeList(it.list)
             is SearchState.Failed -> showError(it.message)
         }
@@ -66,7 +68,10 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-
+        if (isLoading)
+            loadingDialog.show()
+        else
+            loadingDialog.dismiss()
     }
 
     private fun showError(message: String) {
