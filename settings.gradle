@@ -10,3 +10,4 @@ rootProject.name = "Modular Pattern"
 include ':app'
 include ':core'
 include ':features:search'
+include ':features:detail'
