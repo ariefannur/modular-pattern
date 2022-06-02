@@ -42,6 +42,7 @@ class DetailUserViewModel @Inject constructor(
             when(it) {
                 is DataState.Success -> _listRepo.value = UserDetailRepoState.Success(it.result)
                 is DataState.Failure -> Log.d("AF", "ERROR REPO ${it.message}")
+
             }
         }
     }

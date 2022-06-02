@@ -41,6 +41,7 @@ dependencies {
     implementation project(":core")
 
     implementation "com.google.dagger:hilt-android:$versions.hilt"
+    androidTestImplementation 'junit:junit:4.12'
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
 
     implementation "androidx.room:room-runtime:$versions.room"
@@ -51,6 +52,14 @@ dependencies {
     testImplementation TestDependency.JUNIT
     testImplementation TestDependency.COROUTINE_TEST
     testImplementation TestDependency.MOCKK
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.6.0"
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
 }
 
 kapt {
