@@ -1,6 +1,7 @@
 package com.github.ariefannur.modular.features.search.presentation
 
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -10,6 +11,7 @@ import com.github.ariefannur.modular.core.extension.gone
 import com.github.ariefannur.modular.core.extension.textChanges
 import com.github.ariefannur.modular.core.extension.visible
 import com.github.ariefannur.modular.core.ui.BaseActivity
+import com.github.ariefannur.modular.features.search.R
 import com.github.ariefannur.modular.features.search.databinding.LayoutSearchBinding
 import com.github.ariefannur.modular.features.search.domain.User
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,10 +57,16 @@ class SearchActivity: BaseActivity<LayoutSearchBinding>() {
 
     private fun setUpList() {
         enableEmpty(true)
+        val decorator = DividerItemDecoration(this@SearchActivity, DividerItemDecoration.VERTICAL)
+        decorator.apply {
+            ContextCompat.getDrawable(this@SearchActivity, R.color.divider)?.let {
+                setDrawable(it)
+            }
+        }
         with(viewBinding.rvSearch) {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             addItemDecoration(
-                DividerItemDecoration(this@SearchActivity, DividerItemDecoration.VERTICAL)
+                decorator
             )
         }
     }

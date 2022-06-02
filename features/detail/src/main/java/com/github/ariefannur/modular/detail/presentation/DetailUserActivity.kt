@@ -1,6 +1,7 @@
 package com.github.ariefannur.modular.detail.presentation
 
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ariefannur.modular.core.ui.BaseActivity
+import com.github.ariefannur.modular.detail.R
 import com.github.ariefannur.modular.detail.databinding.DetailUserActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -64,11 +66,17 @@ class DetailUserActivity: BaseActivity<DetailUserActivityBinding>() {
     }
 
     private fun setUplist() {
+        val decorator = DividerItemDecoration(this@DetailUserActivity, DividerItemDecoration.VERTICAL)
+            decorator.apply {
+                ContextCompat.getDrawable(this@DetailUserActivity, R.color.divider)?.let {
+                    setDrawable(it)
+                }
+            }
        viewBinding.rvDetail.apply {
            layoutManager = LinearLayoutManager(this@DetailUserActivity)
            adapter =  concatAdapter
            addItemDecoration(
-               DividerItemDecoration(this@DetailUserActivity, DividerItemDecoration.VERTICAL)
+               decorator
            )
        }
         username?.let {

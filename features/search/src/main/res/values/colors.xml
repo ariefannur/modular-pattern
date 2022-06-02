@@ -2,5 +2,6 @@
 <resources>
     <color name="text_primary">#000000</color>
     <color name="text_secondary">#333333</color>
+    <color name="text_secondary_light">#707070</color>
     <color name="divider">#F5F5F5</color>
 </resources>
