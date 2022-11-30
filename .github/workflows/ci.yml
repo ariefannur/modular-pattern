@@ -2,15 +2,7 @@
 name: Test and deploy
 
 ## Actions that will be executed when you push code currently none
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types:
-      - opened
-    branches:
-      - 'master'
+on: pull_request
 
 ## 2
 jobs:
