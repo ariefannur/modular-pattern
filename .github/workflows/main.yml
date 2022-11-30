@@ -7,7 +7,7 @@ on:
     types:
       - [opened, reopened, edited]
     branches:
-      - 'feature/**'
+      - 'master'
 
 ## 2
 jobs:
