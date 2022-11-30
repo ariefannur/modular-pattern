@@ -8,6 +8,8 @@ on:
       - [opened, reopened, edited]
     branches:
       - 'master'
+    paths:
+      - '**.kt'
 
 ## 2
 jobs:
