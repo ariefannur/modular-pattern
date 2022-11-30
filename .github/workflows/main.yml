@@ -8,7 +8,7 @@ on:
       - main
   pull_request:
     types:
-      - [opened, reopened, edited]
+      - opened
     branches:
       - 'master'
 
