@@ -4,11 +4,11 @@ pipeline {
 	}
 	stages {
 		stage('Test') {
-			sh './gradlew testDebugUnitTest'
+			./gradlew testDebugUnitTest
 		}
 
 		stage('Build') {
-			sh './gradlew assembleDebug'
+			./gradlew assembleDebug
 		}
 	}
 }
