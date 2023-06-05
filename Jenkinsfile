@@ -9,10 +9,10 @@ pipeline {
 	stages {
 	    stage('Checkout') {
 	        steps {
-	            sh "echo param ${params.branch}"
 	            git (
 	                url: "https://github.com/ariefannur/modular-pattern/",
-	                branch: "${params.branch}"
+					credentialsId: "",
+	                branch: "master"
 	                )
 	        }
 	    }
