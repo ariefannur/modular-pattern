@@ -46,3 +46,5 @@ use github action for CI (continuous integration) with private repository here h
 ##### WIP Integration test
 
 Mock web server sample `DetailUserActivityTest.kt`
+
+##### Integration with jenkins
