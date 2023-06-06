@@ -28,12 +28,18 @@ pipeline {
 	        }
 	    }
 		stage('Test') {
+			when {
+				branch "feature/*"
+			}
 			steps {
 				sh "./gradlew testDebugUnitTest"
 			}
 		}
 
 		stage('Build') {
+			when {
+				branch "master"
+			}
 			steps {
 				sh "./gradlew assembleDebug"
 			}
